@@ -1,0 +1,4 @@
+export {
+    loadResource
+} from './resoure';
+
