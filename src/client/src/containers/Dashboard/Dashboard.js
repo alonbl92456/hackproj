@@ -4,14 +4,16 @@ import {
   CardBody,
   CardHeader,
   Col,
-  Row,
+  Row
 } from 'reactstrap';
+import CardWrapper from '../../hoc/CardWrapper/CardWrapper';
 import Widget04 from '../../views/Widgets/Widget04';
 import NavWidget from '../../componments/UI/NavWidget/NavWidget';
 import navs from '../../_nav';
-import { Line } from 'react-chartjs-2';
+import { Line,Pie } from 'react-chartjs-2';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-
+import labelsPlugin from 'chartjs-plugin-labels';
+import DataTable from '../../componments/DataTable/DataTable';
 
 // Main Chart
 
@@ -25,12 +27,131 @@ var labels = [];
 var data2 = [];
 var data3 = [];
 
+var dataAnger = [];
+var datacontempt = [];
+var datadisgust = [];
+var datafear = [];
+var datahapiness = [];
+var dataneutral = [];
+var datasadness = [];
+var datasuprise = [];
+
 for (var i = 0; i <= 28; i++) {
   data1.push(random(50, 200));
-  labels.push(new Date(2017, 8, i + 1));
+  labels.push(new Date(2019, 8, i + 1));
   data2.push(random(80, 100));
   data3.push(65);
+
+  dataAnger.push(random(50, 200));
+  datacontempt.push(random(50, 200));
+  datadisgust.push(random(50, 200));
+  datafear.push(random(50, 200));
+  datahapiness.push(random(50, 200));
+  dataneutral.push(random(50, 200));
+  datasadness.push(random(50, 200));
+  datasuprise.push(random(50, 200));
+
 }
+
+var sadnessRateEmp = [
+  {
+    "id": "12345789",
+    "rate" : 14
+  },
+  {
+    "id": "22222",
+    "rate" : 11
+  },
+  {
+    "id": "33333",
+    "rate" : 7
+  }
+]
+
+var hapinessRateEmp = [
+  {
+    "id": "444444",
+    "rate" : 14
+  },
+  {
+    "id": "55555",
+    "rate" : 11
+  },
+  {
+    "id": "666666",
+    "rate" : 7
+  }
+]
+
+const pieOptions = {
+  tooltips: {
+    enabled: false
+  },
+  legend: {
+    display: false
+  },
+  animations: {
+    duration: 3000,
+  },
+  "animation": {
+    "animateRotate": true,
+    "animateScale": true
+  },
+  plugins: {
+    labels: {
+      // render 'label', 'value', 'percentage', 'image' or custom function, default is 'percentage'
+      render: 'label',
+
+      // precision for percentage, default is 0
+      precision: 0,
+
+      // identifies whether or not labels of value 0 are displayed, default is false
+      showZero: true,
+
+      // font size, default is defaultFontSize
+      fontSize: 12,
+
+      // font color, can be color array for each data or function for dynamic color, default is defaultFontColor
+      fontColor: '#000000',
+
+      // font style, default is defaultFontStyle
+      fontStyle: 'normal',
+
+      // font family, default is defaultFontFamily
+      fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+      // draw text shadows under labels, default is false
+      textShadow: true,
+    }
+  }
+};
+
+const colors = {
+  red: '#f86c6b',
+  green: '#20c997',
+  yellow: '#FFCE56',
+  darkRed: '#c93c45',
+  darkGreen: '#4dbd74',
+  darkYellow: '#FFCE56',
+  blue:'#17a2b8',
+  gray:"#5c6873"
+}
+
+
+const pieLables = ["happines","other"];
+
+const pieData = {
+  labels: pieLables,
+  datasets: [
+    {
+      data: [90,30],
+      backgroundColor: [colors.green,  colors.gray ],
+      hoverBackgroundColor: [],
+      hoverBorderWidth: 5,
+      hoverBorderColor: "#c8ced3"
+    }],
+};
+
 
 const mainChartOpts = {
   tooltips: {
@@ -104,7 +225,7 @@ const options = {
       display: true,
       scaleLabel: {
         display: true,
-        labelString: "Used(GB)",
+        labelString: "Emotion Rate",
         fontSize: 20
       }
     }]
@@ -116,49 +237,91 @@ const mainChart = {
   labels: labels,
   datasets: [
     {
-      label: '381',
+      label: 'anger',
       fill: false,
       lineTension: 0.1,
-      backgroundColor: 'rgba(75,192,192,0.4)',
-      borderColor: 'rgba(75,192,192,1)',
+      backgroundColor: '#FFCE56',
+      borderColor: '#FFCE56',
       borderCapStyle: 'butt',
       borderDash: [],
       borderDashOffset: 0.0,
       borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBorderColor: '#FFCE56',
       pointBackgroundColor: '#fff',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBackgroundColor: '#FFCE56',
       pointHoverBorderColor: 'rgba(220,220,220,1)',
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: data1,
+      data: dataAnger,
     },
     {
-      label: '912',
+      label: 'fear',
       fill: false,
       lineTension: 0.1,
-      backgroundColor: 'rgba(75,192,100,0.4)',
-      borderColor: 'rgba(75,192,100,1)',
+      backgroundColor: '#f86c6b',
+      borderColor: '#f86c6b',
       borderCapStyle: 'butt',
       borderDash: [],
       borderDashOffset: 0.0,
       borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBorderColor: '#f86c6b',
       pointBackgroundColor: '#fff',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBackgroundColor: '#f86c6b',
       pointHoverBorderColor: 'rgba(220,220,220,1)',
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: data2,
+      data: datafear,
+    },{
+      label: 'hapiness',
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: '#20c997',
+      borderColor: '#20c997',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: '#20c997',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: '#20c997',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: datahapiness,
+    },
+    {
+      label: 'sadness',
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: '#17a2b8',
+      borderColor: '#17a2b8',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: '#17a2b8',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: '#17a2b8',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: datasadness,
     }
   ],
 };
+
 
 
 class Dashboard extends Component {
@@ -192,23 +355,30 @@ class Dashboard extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
-          {navs.items.map(curNav =>
-            <Col sm="6" md="3">
-              <NavWidget key={curNav.name}
-                icon={curNav.icon}
-                color={curNav.color}
-                header={curNav.name}
-                invert link={curNav.url} >
-              </NavWidget>
+            <Col>
+              <DataTable title="Top Sad Emp" columns={Object.keys(sadnessRateEmp[0])} data={sadnessRateEmp.map(cur => Object.values(cur))} isEmpty={false} isLoading={false} />
             </Col>
-          )}
+            
+            <Col>
+            <DataTable title="Top happy Emp" columns={Object.keys(hapinessRateEmp[0])} data={hapinessRateEmp.map(cur => Object.values(cur))} isEmpty={false} isLoading={false} />
+            </Col>
+            <Col>
+            <Card  style={{ height: "100%" }} >  
+            <CardHeader>
+                <h2>hapiness percentage</h2>
+            </CardHeader>
+            <CardBody>
+            <Pie data={pieData} options={pieOptions} />
+              </CardBody>
+            </Card>
+            </Col>
         </Row>
 
         <Row>
           <Col>
             <Card style={{ width: "100%", height: "100%" }}  >
               <CardHeader>
-                <h2>SAN Used Capacity</h2>
+                <h2>Feeling</h2>
               </CardHeader>
               <CardBody style={{ width: "100%", height: "100%" }} >
                 <div className="chart-wrapper">
