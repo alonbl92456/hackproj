@@ -15,6 +15,11 @@ export default class EmpsView extends PureComponent {
 
   }
 
+
+  showWorker(rowData){
+    this.props.history.push(this.props.match.path + "/" + rowData[0]);
+  }
+
   render() {
 
     var dummyData = [
@@ -244,6 +249,7 @@ export default class EmpsView extends PureComponent {
         }],
     };
 
+    
 
     return (
       <div>
@@ -261,7 +267,7 @@ export default class EmpsView extends PureComponent {
         </Row>
         <Row>
           <Col lg={12}>
-            <DataTable title="Your Employess" columns={Object.keys(dummyData[0])} data={dummyData.map(cur => Object.values(cur))} isEmpty={false} isLoading={false} />
+            <DataTable rowClicked={(...data) => this.showWorker(...data)} title="Your Employess" columns={Object.keys(dummyData[0])} data={dummyData.map(cur => Object.values(cur))} isEmpty={false} isLoading={false} />
           </Col>
 
         </Row>

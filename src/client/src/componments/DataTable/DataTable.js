@@ -53,6 +53,11 @@ const DataTable = (props) => {
       } : curCol[0].toUpperCase() + curCol.slice(1);
   });
 
+
+  if(props.rowClicked){
+    options.onRowClick = props.rowClicked
+  }
+
   return (
     <MuiThemeProvider theme={getMuiTheme()}>
       <MUIDataTable

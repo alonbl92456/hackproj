@@ -37,7 +37,7 @@ const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   { path: '/dashboard', name: '', component: Dashboard },
   { path: '/employees/details', exact: true, name: 'Employees', component: EmpsView },
-  { path: '/employess/details/:id/', exact: true, name: 'Employee Details', component: EmpView }
+  { path: '/employees/details/:id/', exact: true, name: 'Employee Details', component: EmpView }
 ];
 
 export default routes;
