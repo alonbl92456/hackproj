@@ -359,16 +359,18 @@ const options = {
         <Row>
           <Col>
             <CardWrapper title={"Employ Details"}>
-            <ul>
-              <li>Name: {emp.name}</li>
-              <li>Job: {emp.job}</li>
-              <li>Department:{emp.department}</li>
-              <li>Manager: {emp.manager}</li>
-            </ul>
+            <table className={"table"}>
+              <tbody className={"table-bordered"}> 
+              <tr> <td>Name:</td><td> {emp.name}</td></tr>
+              <tr><td>Job: </td><td> {emp.job}</td></tr>
+              <tr><td>Department: </td><td> {emp.department}</td></tr>
+              <tr><td>Manager: </td><td> {emp.manager}</td></tr>
+              </tbody>
+            </table>
             </CardWrapper>
           </Col>
           <Col>
-            <CardWrapper title={"Overoll fleeings"}>
+            <CardWrapper title={"Overall Feelings"}>
               <Pie data={doughnut} options={doughnutOptions} />
             </CardWrapper>
           </Col>

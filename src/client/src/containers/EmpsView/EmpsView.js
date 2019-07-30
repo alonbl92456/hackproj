@@ -25,101 +25,79 @@ export default class EmpsView extends PureComponent {
     var dummyData = [
       {
         "id": "12345789",
-        "anger": 0,
+        "anger": 0.6,
         "contempt": 0,
         "disgust": 0,
-        "fear": 0,
-        "happiness": 0,
-        "neutral": 0.999,
+        "fear": 0.4,
+        "happiness": 0.2,
+        "neutral": 0.1,
         "sadness": 0.001,
         "surprise": 0
       },
       {
-        "id": "22222",
+        "id": "22345789",
         "anger": 0,
         "contempt": 0,
-        "disgust": 0,
-        "fear": 0,
-        "happiness": 0,
-        "neutral": 0.999,
+        "disgust": 0.3,
+        "fear": 0.1,
+        "happiness": 0.5,
+        "neutral": 0.2,
         "sadness": 0.001,
         "surprise": 0
       },
       {
-        "id": "33333",
-        "anger": 0,
-        "contempt": 0,
+        "id": "12346789",
+        "anger": 0.3,
+        "contempt": 0.2,
         "disgust": 0,
-        "fear": 0,
-        "happiness": 0,
-        "neutral": 0.999,
+        "fear": 0.24,
+        "happiness": 0.23,
+        "neutral": 0.4,
         "sadness": 0.001,
         "surprise": 0
       },
       {
-        "id": "444444",
-        "anger": 0,
+        "id": "12745789",
+        "anger": 0.41,
         "contempt": 0,
-        "disgust": 0,
+        "disgust": 0.1,
         "fear": 0,
-        "happiness": 0,
-        "neutral": 0.999,
+        "happiness": 0.3,
+        "neutral": 0.2,
         "sadness": 0.001,
         "surprise": 0
       },
       {
-        "id": "55555",
-        "anger": 0,
-        "contempt": 0,
-        "disgust": 0,
-        "fear": 0,
+        "id": "12344489",
+        "anger": 0.1,
+        "contempt": 0.3,
+        "disgust": 0.2,
+        "fear": 0.1,
         "happiness": 0,
-        "neutral": 0.999,
+        "neutral": 0,
         "sadness": 0.001,
         "surprise": 0
       }, {
-        "id": "666666",
-        "anger": 0,
-        "contempt": 0,
+        "id": "12322229",
+        "anger": 0.1,
+        "contempt": 0.1,
         "disgust": 0,
-        "fear": 0,
+        "fear": 0.6,
         "happiness": 0,
-        "neutral": 0.999,
+        "neutral": 0.2,
         "sadness": 0.001,
-        "surprise": 0
+        "surprise": 0.3
       },
       {
-        "id": "888888888",
-        "anger": 0,
-        "contempt": 0,
-        "disgust": 0,
-        "fear": 0,
+        "id": "12345123",
+        "anger": 0.1,
+        "contempt": 0.14,
+        "disgust": 0.26,
+        "fear": 0.78,
         "happiness": 0,
-        "neutral": 0.999,
+        "neutral": 0.3,
         "sadness": 0.001,
-        "surprise": 0
-      },
-      {
-        "id": "12312312321",
-        "anger": 0,
-        "contempt": 0,
-        "disgust": 0,
-        "fear": 0,
-        "happiness": 0,
-        "neutral": 0.999,
-        "sadness": 0.001,
-        "surprise": 0
-      },
-      {
-        "id": "2342432",
-        "anger": 0,
-        "contempt": 0,
-        "disgust": 0,
-        "fear": 0,
-        "happiness": 0,
-        "neutral": 0.999,
-        "sadness": 0.001,
-        "surprise": 0
+        "surprise": 0.3
       }
     ];
 
@@ -129,7 +107,8 @@ export default class EmpsView extends PureComponent {
         enabled: false
       },
       legend: {
-        display: false
+        display: true,
+        position:"left"
       },
       animations: {
         duration: 3000,
@@ -141,7 +120,7 @@ export default class EmpsView extends PureComponent {
       plugins: {
         labels: {
           // render 'label', 'value', 'percentage', 'image' or custom function, default is 'percentage'
-          render: 'label',
+          render: 'percentage',
 
           // precision for percentage, default is 0
           precision: 0,
@@ -220,7 +199,7 @@ export default class EmpsView extends PureComponent {
           borderWidth: 1,
           hoverBackgroundColor: colors.darkRed,
           hoverBorderColor: colors.darkRed,
-          data: [65, 59, 80, 81, 56, 55, 40]
+          data: [0.35, 0.59, 0.40, 0.21, 0.56, 0.25, 0.40]
         },
         {
           label: 'Happines',
@@ -229,19 +208,22 @@ export default class EmpsView extends PureComponent {
           borderWidth: 1,
           hoverBackgroundColor: colors.darkGreen,
           hoverBorderColor: colors.darkGreen1,
-          data: [120, 1, 44, 100, 200, 123, 1]
+          data: [0.120, 0.4, 0.44, 0.600, 0.200, 0.523, 0.7]
         },
       ]
     };
 
 
     const pieLables = ["happines","saddness","anger","fear","other"];
-
+   //Random Numbers
+   function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
     const doughnut = {
       labels: ["happines","saddness","anger","fear","other"],
       datasets: [
         {
-          data: pieLables.map(cur => 1.5),
+          data: pieLables.map(cur => 0.2 * random(1,5)),
           backgroundColor: [colors.green, colors.blue, colors.yellow, colors.red, colors.gray ],
           hoverBackgroundColor: [],
           hoverBorderWidth: 5,
@@ -255,12 +237,12 @@ export default class EmpsView extends PureComponent {
       <div>
         <Row>
           <Col lg="8">
-            <CardWrapper className="chart-wrapper">
+            <CardWrapper title="Employess Happnies Ratio" className="chart-wrapper">
               <Bar data={bar} options={barOptions} />
             </CardWrapper>
           </Col>
           <Col lg="4">
-            <CardWrapper className="chart-wrapper">
+            <CardWrapper title="Feelings distribuation" className="chart-wrapper">
               <Pie data={doughnut} options={doughnutOptions} />
             </CardWrapper>
           </Col>
